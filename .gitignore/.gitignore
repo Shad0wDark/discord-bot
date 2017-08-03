@@ -1,0 +1,470 @@
+const Discord = require("discord.js");
+const YTDL = require("ytdl-core");
+const TOKEN = "MzI4MzkyNzY2ODE4MzUzMTUy.DDGXww.229_xslq93kmnb1wtlBxaRJFSiY";
+const PREFIX = "!bt "
+
+function play(connection, message) {
+        var server = servers[message.guild.id];
+
+        server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
+
+        server.queue.shift();
+
+        server.dispatcher.on("end", function() {
+            if (server.queue[0]) play(connection, message);
+            else connection.disconnect();
+        
+        });
+}
+
+var isReady = true;
+
+
+
+var fortunes = [
+    "Yes",
+    "Agreed",
+    "Disagreed",
+    "No",
+    "Maybe",
+    "I don't know",
+    "Searching...",
+    "Fuck you",
+
+];
+
+var coremeter = [
+    "7%",
+    "25%",
+    "0%",
+    "50%",
+    "100%",
+    "75%",
+    "62%",
+    "87%",
+    "33%"
+
+];
+
+var bot = new Discord.Client();
+
+var servers = {};
+
+bot.on("ready", function(){
+    console.log("Loading bot... \
+    Version 1.0.5 ALPHA \
+    'Titan Ready For Deployment - Press !bt for action'");
+});
+
+bot.on("guildMemberAdd", function(member) {
+    member.guild.channels.find("name", "general").sendMessage("Welcome " +member+ " to the server, I'm BT-7274, a bot assigned to help users of this server, if you need any further help just type !bt commands for my assistance.");
+
+    member.addRole(member.guild.roles.find("name", "newcomer"));
+});
+
+bot.on('message', message => {
+  if (isReady && message.content === 'nsguard')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/guard.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " guardmode");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nsfollow')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/follow.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " followmode");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nseject')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/eject eject eject.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " 3xEject");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nspm')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/nspm.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " Northstar systems transfered to pilot.");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nswelcome')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/welcomeback.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " pilot is back.");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nsreactor')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/warning reactor exposed.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " warning reactor exposed.");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nswarning')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/warning.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " warning.");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nssys')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/the systems are yours we are a strong force together.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " the systems are yours we are a strong force together.");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nsfcr')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/flight core ready.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " flight core ready.");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nsfco')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/flight core offline.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " flight core offline.");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nsfce')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/flight core energized.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " flight core energized.");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'nsfca')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/flight core activated.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " flight core activated.");
+  }
+});
+bot.on('message', message => {
+  if (isReady && message.content === 'airborn')
+  {
+  isReady = false;
+  var voiceChannel = message.member.voiceChannel;
+  voiceChannel.join().then(connection =>
+  {
+     const dispatcher = connection.playFile('./nsv/airborn systems are in your control pilot.wav');
+     dispatcher.on("end", end => {
+       voiceChannel.leave();
+       });
+   }).catch(err => console.log(err));
+   isReady = true;
+   console.log(message.author + " airborn systems are in your control pilot.");
+  }
+});
+bot.on("message", function(message) {
+    if (message.author.equals(bot.user))return;
+
+    if (!message.content.startsWith(PREFIX)) return;
+
+    var args = message.content.substring(PREFIX.length).split(" ");
+
+    switch (args[0].toLowerCase()) {
+        case "egg":
+            message.channel.sendMessage("'At least it wasn't me who broke the egg!' Baeza, Walter 2017");
+            console.log(message.author + " egg");
+            break;
+        case "w33d":
+            message.channel.sendMessage("Here's your w33d > https://www.youtube.com/watch?v=KlujizeNNQM");
+            console.log(message.author + " w33d");
+            break;
+        case "version":
+            message.channel.sendMessage("Alpha version 1.0.5");
+            console.log(message.author + " version");
+            break;
+        case "patch":
+            message.channel.sendMessage("Patch 1.0.5 : added voice pack for northstar AI, use !bt speak for the list of audios, then just use the word with the prefix ns____ . Example nswelcome. in future patches i will be added other AI's. Any questions ask Batman, Viper out.");
+            console.log(message.author + " patch");
+            break;    
+        case "nice_work":
+            message.channel.sendMessage("Thanks you for the compliment " +message.author+ ", I was just doing what I was told to do. :smile: ");
+            console.log(message.author + " nice_work");
+            break;
+        case "birdday":
+            message.channel.sendMessage("https://www.youtube.com/watch?v=fO_vljte6A8");
+            console.log(message.author + " birdday");
+            break;
+        case "daclub":
+            message.channel.sendMessage(" There you are 'Nigga' > https://www.youtube.com/watch?v=5qm8PH4xAss");
+            console.log(message.author + " daclub");
+            break;
+        case "protocols":
+            message.channel.sendMessage("Protocol one: link to Pilot. Protocol two: uphold the mission. Protocol three: protect the Pilot.");
+            console.log(message.author + " protocols");            
+            break;
+        case "im_back":
+            message.channel.sendMessage("Welcome back " +message.author+ ", I wish you a good stay.");
+            console.log(message.author + " im_back");
+            break;
+        case "toon":
+            message.channel.sendMessage("https://www.youtube.com/channel/UCzOF4cf6IO0IcgHlZ5VvFag");
+            console.log(message.author + " asked for TitanToons YT channel.");
+            break;       
+        case "speak":
+            message.channel.sendMessage("bot speeches: nsguard, nsfollow, nseject, nspm, nswelcome, nsreactor, nswarning, nssys, nsfcr, nsfco, nsfce, nsfca, airborn.");
+            break;
+        case "im_out":
+            message.channel.sendMessage("Farewell " +message.author+  " I wish good luck to you.");
+            console.log(message.author + " im_out");
+            break;
+        case "pilot":
+            message.channel.sendMessage("My actual Pilot is VIPER_V1, we have been connected since october 29th of the earth year of 2016.");
+            console.log(message.author + " pilot");        
+            break;
+        case "net":
+            message.channel.sendMessage("My pilot's Network is 'Oblivion Pilots' [OBVL], feel free to join it.");
+            console.log(message.author + " net");
+            break;
+        case "fnn":
+            message.channel.sendMessage("Latest Titanfall2 news here > https://www.ea.com/pt-br/games/titanfall/titanfall-2/news");        
+            console.log(message.author + " fnn");
+            break;
+        case "core":   
+            message.channel.sendMessage(coremeter[Math.floor(Math.random() * coremeter.length )]);
+            console.log(message.author + " core");
+            break;
+        case "status":
+            message.channel.sendMessage("Fully armed and operational at your orders");
+            console.log(message.author + " status");
+            break;
+        case "agamemnon":
+            message.channel.sendMessage("https://youtu.be/pJ2IpJyapG8");
+            console.log(message.author + " asked for The Agamemnon Contingency");
+            break;
+        case "fall":
+            message.channel.sendMessage("Prepare for TitanFall http://i.imgur.com/99lAnF1.gif");
+            console.log(message.author + " fall");
+            break;
+        case "ping":
+            message.channel.sendMessage("Pong!");
+            console.log(message.author + " ping");
+            break;
+        case "mission":
+            message.channel.sendMessage("I'm a Vanguard Class Titan assigned to moderate and help the users of this Discord server.");
+            console.log(message.author + " mission");
+            break;
+        case "opinion":
+            if (args[1]) message.channel.sendMessage(fortunes[Math.floor(Math.random() * fortunes.length)]);
+            else message.channel.sendMessage("ERROR 404: MISSING QUESTION");
+            console.log(message.author + " asked my opinion");
+            break;
+        case "titanfallhack":
+            message.channel.sendMessage("Here it is http://tinyurl.com/2g9mqh");
+            console.log(message.author + " asked for hacks");
+            break;
+        case "commands":
+            var commands = new Discord.RichEmbed()
+                .addField("Here is my list of Commands:")
+                .addField("mission", "Show information about me.")
+                .addField("Ping", "I shall respond with an appropriate answer.")
+                .addField("Opinion", "I can give my honest opinion about a certain subject of interest.")
+                .addField("Titanfallhack", " A list of useful hacks for titanfall 2.")
+                .addField("music commands", "play + link, skip, stop")
+                .addField("spotify", "no need to say")
+                .addField("salve", "special message for all the server")
+                .addField("filmes", "show a list of upcoming superhero movies in the near future")
+                .addField("liga", "shows the actual composition of the Justice League")
+                .addField("fall", "Initiate TitanFall process.")
+                .addField("status", "I'll tell you my actual condiction.")
+                .addField("core", "I will display my core meter.")
+                .addField("protocols","I will show my current protocols")
+                .addField("net","Shows the data of my pilot's network.")
+                .addField("fnn","You can find the TitanFall2 Frontier News Network.")
+            message.channel.sendEmbed(commands);
+            console.log(message.author + " asked for my commands");
+            break;
+        case "liga":
+            message.channel.sendMessage("Batman=Shadow#4434, Superman=Arthur#0885, Mulher-Maravilha=giitoschii#1300, Lanterna-Verde=Rangel#9353, Flash=Henrique Lyra#7581, BatGirl=Duda#3589, Mutano=Walter#6960, Black Adam=Deus Negro#3072, Sasuke=Cesar#9484, Deadpool(?)=Vitormamede#6395");
+            console.log(message.author + " asked about the actual composition of the Justice League");
+            break;
+        case "heybt":
+            message.channel.sendMessage(message.author.toString() + " Yes Pilot do you need anything?");
+            console.log(message.author + " said hey bt");
+            break;
+        case "spotify":
+            message.channel.sendMessage("It's here > https://open.spotify.com/user/fernandomiguel99");
+            console.log(message.author + " asked for your spotify");
+            break;
+        case "moises": 
+            message.channel.sendMessage("Não Consegue né? http://i.ytimg.com/vi/HCVsd6R1L4Y/hqdefault.jpg");
+            console.log(message.author + " asked for the meme");
+            break;
+        case "bololo":
+            message.channel.sendMessage("https://www.youtube.com/watch?v=oowBXzfcl90");
+            console.log(message.author + " asked for this song");
+            break; 
+        case "salve":
+            message.channel.sendMessage("COÉ RAPAZIADAAAAA!!!! SALVE!!!! http://www.ahnegao.com.br/wp-content/uploads/2017/04/4-14.jpg");
+            console.log(message.author + " welcomed the server");
+            break;
+        case "filmes":
+            message.channel.sendMessage("Here you go > https://omelete.uol.com.br/calendario-de-filmes-dc-e-marvel/");
+            console.log(message.author + " asked for the movies calendar");
+            break;
+        case "play":
+            if (!args[1]) {
+                message.channel.sendMessage(message.author + " Please provide a link for me to use.");
+                return;
+            }
+
+            if (!message.member.voiceChannel) {
+                message.channel.sendMessage(message.author + " You must be in a voice channel.");
+                return;
+            }
+            if (!servers[message.guild.id]) servers[message.guild.id] = {
+                queue: []
+            };
+
+            var server = servers[message.guild.id]
+
+            server.queue.push(args[1]);
+
+            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+                play(connection, message);
+            });
+            message.channel.sendMessage("Successfully added to queue.");
+            console.log(message.author + " asked for a song");
+            break;
+        case "skip":
+            var server = servers[message.guild.id];
+
+            if (server.dispatcher) server.dispatcher.end();
+            console.log(message.author + " skipped the actual song");
+            break; 
+        case "stop":
+             var server = servers[message.guild.id];
+
+             if (message.guild.voiceConnection) {
+            for (var i = server.queue.length - 1; i >= 0; i--) {
+                server.queue.splice(i, 1);
+         }
+            server.dispatcher.end();
+            console.log("[" + new Date().toLocaleString() + "] Stopped the queue.");
+        }
+            console.log(message.author + " stopped the song");
+            break;
+        default:
+            message.channel.sendMessage("invalid command");
+    }
+    
+});
+
+bot.login(TOKEN);
